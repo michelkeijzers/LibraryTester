@@ -202,18 +202,6 @@ int MyMain(void)
    uint32_t end= SysTickSubscribers::GetTick();
    char key = _keyPad.Scan();
 
-
-   /*
-   uint16_t key = _keyPad.Scan();
-   if (key != 0)
-   {
-      char line2[17];
-      sprintf(line2, "Key pressed: %c  ", _keyPad.GetChar(key));
-      _lcdDisplay.SetLine(1, line2);
-   }
-
-   */
-
    /*
    for (uint8_t n = 0; n < sizeof(_dataToShift); n++)
    {
