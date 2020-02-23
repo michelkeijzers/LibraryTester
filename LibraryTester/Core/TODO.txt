@@ -1,0 +1,4 @@
+Button: Swap subscriber index and debounce time
+LCD improvement: only send changed characters (copy characters from display in array, costs 4x20 = 80 bytes max), but goto-xy also takes time
+LCD improvement: send only one character per interrupt (to spread the transmit times)
+
