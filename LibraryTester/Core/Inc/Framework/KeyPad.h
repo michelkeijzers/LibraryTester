@@ -3,6 +3,8 @@
  *
  *  Created on: Feb 1, 2020
  *      Author: Michel Keijzers
+ *
+ * Somehow most GPIO defines do not work anymore, making Scan slower than needed.
  */
 
 #ifndef SRC_KEYPAD_INT_H_

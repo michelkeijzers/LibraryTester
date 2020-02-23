@@ -69,7 +69,8 @@ void KeyPad::Init()
    SetRows();
    for (uint8_t row = 0; row < _nrOfRows; row++)
    {
-      RESET_GPIO_PIN(_rows[row].port, _rows[row].pin);
+      HAL_GPIO_WritePin(_rows[row].port, _rows[row].pin, GPIO_PIN_RESET);
+      //RESET_GPIO_PIN(_rows[row].port, _rows[row].pin);
    }
 }
 
@@ -195,10 +196,13 @@ char KeyPad::Scan()
 {
    char pressedChar = ' ';
 
+   SetRows();
+
    for (uint8_t row = 0; row < _nrOfRows; row++)
    {
-      RESET_GPIO_PIN(_rows[row].port, _rows[row].pin);
+      HAL_GPIO_WritePin(_rows[row].port, _rows[row].pin, GPIO_PIN_RESET);
       int8_t columnLow = GetLowColumn();
+      //HAL_GPIO_WritePin(_rows[row].port, _rows[row].pin, GPIO_PIN_SET);
       SET_GPIO_PIN(_rows[row].port, _rows[row].pin);
 
       if (columnLow != -1)
@@ -219,6 +223,7 @@ int8_t KeyPad::GetLowColumn()
 {
    for (uint8_t column = 0; column < _nrOfColumns; column++)
    {
+      //if (HAL_GPIO_ReadPin(_columns[column].port, _columns[column].pin) == GPIO_PIN_RESET)
       if (IS_GPIO_PIN_RESET(_columns[column].port, _columns[column].pin))
       {
          return column;
@@ -233,6 +238,8 @@ void KeyPad::SetRows()
 {
    for (uint8_t row = 0; row < _nrOfRows; row++)
    {
-      SET_GPIO_PIN(_rows[row].port, _rows[row].pin);
+      HAL_GPIO_WritePin(_rows[row].port, _rows[row].pin, GPIO_PIN_SET);
+      //SET_GPIO_PIN(_rows[row].port, _rows[row].pin);
+      //GPIOx->BSRR = (uint32_t)GPIO_Pin << 16u;
    }
 }
